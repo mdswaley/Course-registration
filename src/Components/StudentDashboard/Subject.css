@@ -1,0 +1,18 @@
+.main{
+    transition: 0.5s;
+    border-radius: 3%;
+    box-shadow: 1px 1px 5px 5px gray;
+    gap:10px;
+    padding: 30px;
+    border: 2px solid rosybrown;
+    
+  }
+  .main:hover{
+    border: 2px solid rgb(154, 147, 147);
+    /* transform: rotateY(360deg); */
+    /* transition: 2.5s; */
+    
+  }
+  #feather{
+    margin-left:0px;
+  }

@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Times New Roman', Times, serif; */
+}
+
+body{
+    background-color:white
+}
+.card h1{
+    font-size: 3.2rem;
+    margin: 2rem 0;
+    text-align: center;
+    
+}
+.card h2{
+    font-size: 2.4rem;
+}
+.card p{
+    margin: 2rem 0;
+    color: black;
+    font-weight: 600;
+    font-size: 1.6rem;
+    display: inline-block;
+}
+.card span{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.card{
+    min-width: 20rem;
+    width: 40vw;
+    padding: 4rem;
+    background-color: white;
+    box-shadow: black 0px 1px 5px 0px;
+    border-radius: 0.5rem;
+    color: #15133c;
+}
+.card-button{
+    flex-direction: row;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.card-button a{
+    color: #92b4ec;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.card-button a:last-child{
+    color: red;
+}
