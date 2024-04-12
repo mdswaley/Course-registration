@@ -1,7 +1,8 @@
 import React from "react";
 import Dashboard from "./Dashboard";
 
-const AProfile = () => {
+const AProfile = ({user}) => {
+  const { firstname, lastname, email } = user;
   return (
     <div style={{ display: "flex" }}>
       <Dashboard />
@@ -26,19 +27,19 @@ const AProfile = () => {
               <tbody>
                 <tr>
                   <th scope="row">Name</th>
-                  <td>BIKASH MALU</td>
+                  <td>{firstname}{lastname}</td>
                  
                 </tr>
                 <tr>
                   <th scope="row">Email</th>
-                  <td>admin1@gmail.com</td>
+                  <td>{email}</td>
                   
                 </tr>
-                <tr>
+                {/* <tr>
                   <th scope="row">Password</th>
                   <td colspan="2">1234</td>
                  
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>

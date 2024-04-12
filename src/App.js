@@ -28,6 +28,11 @@ import { useState } from 'react';
 
 function App() {
   const [lastDeletedStudent, setLastDeletedStudent] = useState(null);
+  const [user, setUser] = useState({});
+
+  const updateUser = (userData) => {
+    setUser(userData);
+  };
   return (
     <Router>
       <div className="app-container">
@@ -36,8 +41,8 @@ function App() {
           <Route path="/service" element={<Service title="Courses" />} />
           <Route path="/" element={<Banner title="Welcome to Student Subject Registration" />} />
           <Route path="/dashboard" element={<Sidebar title="dashbaord" />} />
-          <Route path="/log" element={<Resister title="login" />} />
-          <Route path="/dabout" element={<Dabout title="studentabout" />} />
+          <Route path="/log" element={<Resister title="login" updateUser={updateUser}/>} />
+          <Route path="/dabout" element={<Dabout title="studentabout" user={user} />} />
           <Route path="/dsubject" element={<Subject title="studentsubject" />} />
           <Route path="/dregistration" element={<Registration title="sudentregistartion" />} />
           <Route path="/dpassword" element={<Changepass title="dashbaord" />} />
@@ -49,10 +54,10 @@ function App() {
           <Route path="/dHistory" element={<History lastDeletedStudent={lastDeletedStudent} />} />
           <Route path="/Ahome" element={<Ahome />} />
           <Route path="/Apassword" element={<Apassword />} />
-          <Route path="/Aabout" element={<AProfile />} />
+          <Route path="/Aabout" element={<AProfile user={user}/>} />
           <Route path="/Alogout" element={<Alogout />} />
           {/* <Route path="/RS" element={<Signup1 title="signup" />} /> */}
-          <Route path="/RS" element={<Signup3 title="signup" />} />
+          <Route path="/RS" element={<Signup3 title="signup" updateUser={updateUser}/>} />
           <Route path="/RS1" element={<Login1 />} />
           <Route path="/dhome" element={<Home title="studenthome" />} />
           <Route path="/acourse" element={<Course title="studenthome" />} />

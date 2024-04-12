@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer'
 
-export default function Signup3(props) {
+export default function Signup3({ updateUser },props) {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -20,6 +20,7 @@ export default function Signup3(props) {
     email:'',
     gender:'',
     password:'',
+    admID:'',
    
 })
 const[error,setError]=useState({
@@ -40,7 +41,7 @@ if(!data.firstname||!data.lastname||!data.email||!data.password||!data.password)
     event.preventDefault();
     return;
 }
-
+updateUser(data);
 
 
 //call the api
@@ -58,7 +59,8 @@ Swal.fire(
     lastname:'',
     email:'',
     password:'',
-    gender:''
+    gender:'',
+    admID:''
   })
   
 
@@ -224,7 +226,7 @@ setError({
                         htmlFor="email"
                         className="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
                       >
-                        Block ID
+                        Admin ID
                       </label>
                       <input
                         type="text"
@@ -233,6 +235,8 @@ setError({
                         name="email-username"
                         placeholder="Enter your Block ID"
                         autoFocus
+                        onChange={(e) => handleChange(e, "admID")}
+                        value={data.admID}
                       />
                     </div>
 
