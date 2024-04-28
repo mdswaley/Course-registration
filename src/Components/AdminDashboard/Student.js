@@ -11,7 +11,7 @@ function Student() {
   const [email, setemail] = useState("");
   const [id, setid] = useState(null);
   const [gender, setgender] = useState(null);
-  const [coursename, setcourse] = useState(null);
+  const [courseName, setCourseName] = useState(null);
   const [password, setpassword] = useState(" ");
   const [data, setdata] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,7 +22,7 @@ function Student() {
     getList();
   }, []);
   function getList() {
-    fetch("http://localhost:8080/api/get").then((result) => {
+    fetch("http://localhost:8080/getAllData").then((result) => {
       result.json().then((resp) => {
         const sortedData = resp.sort((a, b) =>
           a.firstname.localeCompare(b.firstname)
@@ -34,7 +34,7 @@ function Student() {
         // setemail(resp[0].email);
         // setid(resp[0].id);
         // setgender(resp[0].gender);
-        // setcourse(resp[0].coursename);
+        // setCourseName(resp[0].courseName);
         // setpassword(resp[0].password);
         console.log(resp);
       });
@@ -44,7 +44,7 @@ function Student() {
   function save() {
     // console.log(firstname,lastname,email);
     Swal.fire("Good job!", `${firstname}  save succesfully`, "success");
-    let data = { firstname, lastname, email, gender, coursename, password };
+    let data = { firstname, lastname, email, gender, courseName, password };
     fetch("http://localhost:8080/portal/save", {
       method: "POST",
       headers: {
@@ -94,14 +94,14 @@ function Student() {
     setemail(data[id - 1].email);
     setid(data[id - 1].id);
     setgender(data[id - 1].gender);
-    setcourse(data[id - 1].coursename);
+    setCourseName(data[id - 1].courseName);
     setpassword(data[id - 1].password);
   }
 
 
   function updateuser() {
     Swal.fire("Good job!",`${id} update  succesfully`, "success");
-    let item = { firstname, lastname, email, id, gender, coursename ,password};
+    let item = { firstname, lastname, email, id, gender, courseName ,password};
     fetch(`http://localhost:9190/portal/${id}`, {
       method: "PUT",
       headers: {
@@ -129,7 +129,7 @@ function Student() {
       (item.lastname && item.lastname.toLowerCase().includes(searchTermLowerCase)) ||
       (item.email && item.email.toLowerCase().includes(searchTermLowerCase)) ||
       (item.gender && item.gender.toLowerCase().includes(searchTermLowerCase)) ||
-      (item.coursename && item.coursename.toLowerCase().includes(searchTermLowerCase))
+      (item.courseName && item.courseName.toLowerCase().includes(searchTermLowerCase))
     );
   });
   
@@ -169,7 +169,7 @@ function Student() {
                 <td>{item.lastname}</td>
                 <td>{item.email}</td>
                 <td>{item.gender}</td>
-                <td>{item.coursename}</td>
+                <td>{item.courseName}</td>
                 {/* <td>{item.password}</td> */}
 
                 <td>
@@ -286,7 +286,7 @@ function Student() {
                             <select
                               className="form-select"
                               aria-label="Default select example"
-                              onChange={(e) => setcourse(e.target.value)}
+                              onChange={(e) => setCourseName(e.target.value)}
                             >
                               <option selected>Select the course</option>
                               <option value="ST DOMAIN">ST DOMAIN</option>
@@ -451,7 +451,7 @@ function Student() {
                             <select
                               className="form-select"
                               aria-label="Default select example"
-                              onChange={(e) => setcourse(e.target.value)}
+                              onChange={(e) => setCourseName(e.target.value)}
                             >
                               <option selected>Select the course</option>
                               <option value="ST DOMAIN">ST DOMAIN</option>

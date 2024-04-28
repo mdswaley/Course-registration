@@ -66,35 +66,14 @@ export default function Sidebar() {
                 <path d="M3 12v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H11" />
               </svg>
 
-              <span className="ml-2 text-sm font-medium">Register</span>
+              <span className="ml-2 text-sm font-medium">Courses</span>
             </Link>
-            <Link
-              className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              to="/dsubject"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-book-open-check"
-              >
-                <path d="M8 3H2v15h7c1.7 0 3 1.3 3 3V7c0-2.2-1.8-4-4-4Z" />
-                <path d="m16 12 2 2 4-4" />
-                <path d="M22 6V3h-6c-2.2 0-4 1.8-4 4v14c0-1.7 1.3-3 3-3h7v-2.3" />
-              </svg>
-              <span className="ml-2 text-sm font-medium">Subject's</span>
-            </Link>
+          
           </div>
           <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
-            <Link
+            {/* <Link
               className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              to="/dpassword"
+              to="/selectedCor"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,11 +91,11 @@ export default function Sidebar() {
                 <rect width="8" height="6" x="8" y="12" rx="1" />
                 <path d="M10 12v-2a2 2 0 1 1 4 0v2" />
               </svg>
-              <span className="ml-2 text-sm font-medium">Password</span>
-            </Link>
+              <span className="ml-2 text-sm font-medium">Selected Courses</span>
+            </Link> */}
             <Link
               className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              to="/dabout"
+              to="/sprofile"
             >
               <svg
                 className="w-6 h-6 stroke-current"
@@ -136,7 +115,7 @@ export default function Sidebar() {
             </Link>
             <Link
               className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-              to="/msg"
+              to="/stuMsg"
             >
               <svg
                 className="w-6 h-6 stroke-current"

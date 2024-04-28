@@ -36,6 +36,12 @@ setdata({...data,[property]:event.target.value})
 }
 const submitform=(event)=>{
 event.preventDefault();
+
+if (!isValidEmail(data.email)) {
+  toast.error("Please enter a valid email number");
+  return;
+}
+
 if(!data.firstname||!data.lastname||!data.email||!data.password||!data.password){
     toast.error("plz fill all the field")
     event.preventDefault();
@@ -48,8 +54,8 @@ updateUser(data);
 //event.preventDefault();
 service(data).then((resp)=>{
 console.log(resp);
-
-Swal.fire(
+if (resp.email.endsWith("@cutm.ac.in")) {
+  Swal.fire(
     'Good job!',
     `${resp.firstname} Register successfully`,
     'success'
@@ -63,6 +69,17 @@ Swal.fire(
     admID:''
   })
   
+} else {
+  Swal.fire(
+    {
+    icon: "error",
+    title:'Oops...',
+    text: `${resp.firstname} wrong user`,
+    }
+  )
+
+}
+  
 
 }).catch((error)=>{
 console.log(error);
@@ -73,6 +90,10 @@ setError({
 })
 })
 }
+const isValidEmail = (email) => {
+  const emailRegex = /^[0-9]{12}@cutm.ac.in$/;
+  return emailRegex.test(email);
+};
   return (
     <div>
         <title>{props.title}</title>
@@ -200,9 +221,7 @@ setError({
                           )}
                         </span>
                       </div>
-                      <p class="text-xs italic text-red-500">
-                        Please choose a password.
-                      </p>
+                      
                     </div>
                     <div class="md:ml-2">
                       <label
@@ -214,57 +233,15 @@ setError({
                       <input
                         class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         id="c_password"
-                        type="password"
                         placeholder="******************"
+                        
                       />
+                      {/*  */}
+                  
+                      {/*  */}
                     </div>
                   </div>
-                  {/*  */}
-                  <div className="mb-4 md:flex md:justify-between">
-                    <div className="mb-4 md:mr-2 md:mb-0">
-                      <label
-                        htmlFor="email"
-                        className="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
-                      >
-                        Admin ID
-                      </label>
-                      <input
-                        type="text"
-                        className={`block w-full cursor-text appearance-none rounded-md border border-gray-400 bg--100 py-2 px-3 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:text-gray-600 focus:shadow ${"w-full"}`}
-                        id="email"
-                        name="email-username"
-                        placeholder="Enter your Block ID"
-                        autoFocus
-                        onChange={(e) => handleChange(e, "admID")}
-                        value={data.admID}
-                      />
-                    </div>
-
-                    <div className="md:ml-2">
-                      <label
-                        htmlFor="role"
-                        className="mb-2 inline-block text-xs font-medium uppercase text-gray-700"
-                      >
-                        Role
-                      </label>
-                      <div className="flex gap-x-3 w-fit pl-2 pr-2 bg-slate-100 rounded-md text-sm">
-                        <button
-                          type="button"
-                          className={`rounded-md p-2 my-1 transition-all text-black" bg-indigo-500 text-white"}`}
-                        >
-                          Teacher
-                        </button>
-                        <button
-                          type="button"
-                          className={`rounded-md p-2 my-1 transition-all text-black "bg-indigo-500 text-white"}`}
-                        >
-                          Student
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/*  */}
+                  
                   <div class="mb-6 text-center">
                     <button
                       class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline"
@@ -274,21 +251,14 @@ setError({
                     </button>
                   </div>
                   <hr class="mb-6 border-t" />
+                  
                   <div class="text-center">
                     <Link
                       class="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                      to="/forgot-pass"
-                    >
-                      Forgot Password?
-                    </Link>
-                  </div>
-                  <div class="text-center">
-                    <a
-                      class="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                      href="./index.html"
+                      to="/log"
                     >
                       Already have an account? Login!
-                    </a>
+                    </Link>
                   </div>
                 </form>
               </div>

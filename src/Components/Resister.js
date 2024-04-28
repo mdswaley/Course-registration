@@ -4,18 +4,17 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Swal from "sweetalert2";
-import cutmimg from "./img/cutmimg.png";
+import img from './img/logocutmRemove.png'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import Dabout from "./StudentDashboard/Dabout";
+import Dabout from "./StudentDashboard/SProfile";
 
 
-function Resister( { updateUser },props) {
+function Resister() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [admID, setAdmID] = useState("");
   const [isAdmin, setIsAdmin] = useState(false); // State to manage whether the user is an admin or not
   const [showPassword, setShowPassword] = useState(false);
 
@@ -28,8 +27,8 @@ function Resister( { updateUser },props) {
   async function login(event) {
     event.preventDefault();
     try {
-      if (email === "" || password === "" || (isAdmin && admID === "")) {
-        toast("fill all the fields", {
+      if (email === "" || password === "") {
+        toast("Fill all the fields", {
           position: "bottom-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -41,16 +40,28 @@ function Resister( { updateUser },props) {
         });
         return;
       }
-      
-
+  
+      if (!isValidEmail(email) && email !== "admin1@gmail.com") {
+        toast("Please enter a valid email", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+  
       const response = await axios.post("http://localhost:8080/login", {
         email: email,
-        password: password,
-        admID: admID,
+        password: password
       });
-
+  
       console.log(response.data);
-
+  
       if (response.data.message === "email not match") {
         Swal.fire({
           icon: "error",
@@ -58,13 +69,17 @@ function Resister( { updateUser },props) {
           text: "Email does not exist",
         });
       } else if (response.data.message === "login successfully") {
+        localStorage.setItem("loggedInUserEmail", email);
         toast("login successfully");
-
-        if (isAdmin) {
+  
+        if (response.data.email === "admin1@gmail.com") {
+          setIsAdmin(true);
           navigate("/ahome");
+        } else if (email.endsWith("@cutm.ac.in")) {
+          navigate("/dhome");
         } else {
-          navigate("/dabout", { state: { email } }); // Pass email as a prop
-        
+          navigate("/ahome");
+          // Handle other user types
         }
       } else {
         toast("password incorrect", {
@@ -83,48 +98,71 @@ function Resister( { updateUser },props) {
       alert(error);
     }
   }
+  const isValidEmail = (email) => {
+    const emailRegex = /^[0-9]{12}@cutm.ac.in$/;
+    return emailRegex.test(email);
+  };
+  
 
   return (
     <>
       <Navbar />
-      <section
-        class="bg-white min-h-screen flex box-border justify-center items-center"
-        style={{ marginTop: "100px" }}
-      >
-        <title>{props.title} </title>
-        <ToastContainer />
-        <div class="bg-[#dfa674] rounded-2xl flex max-w-3xl p-5 items-center">
-          <div class="md:w-1/2 px-8">
-            <h2 class="font-bold text-3xl text-[#002D74]">Login</h2>
-            <p class="text-sm mt-4 text-[#002D74]">
-              If you already a member, easily log in now.
-            </p>
-            <form action="" class="flex flex-col gap-4">
-              <input
-                class="p-2 mt-8 rounded-xl border"
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                required
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <div class="relative">
+      
+
+      <div className="flex flex-col justify-center" style={{background:"#282F44",height:"700px"}}>
+      <ToastContainer />
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            className="mx-auto h-20 w-auto "
+            src={img}
+            alt="Your Company"
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            Sign in to your account
+          </h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" action="#" method="POST">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
+                Email address
+              </label>
+              <div className="mt-2">
                 <input
-                  class="p-2 rounded-xl border w-full"
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  value={password}
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  required
                   onChange={(e) => {
-                    setPassword(e.target.value);
+                    setEmail(e.target.value);
                   }}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                <span
-                  className="absolute inset-y-5 text-gray-500 right-0 flex items-center pr-1 pb-3"
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                {/*  */}
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
+                  Password
+                </label>
+                
+                  {/*  */}
+                {/* <div className="text-sm">
+                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Forgot password?
+                  </a>
+                  
+                </div> */}
+                
+              </div>
+              <div className="mt-2">
+              <span
+                  className="absolute" style={{marginLeft:"350px",marginTop:"5px"}}
                   onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (
@@ -161,96 +199,40 @@ function Resister( { updateUser },props) {
                     </svg>
                   )}
                 </span>
-              </div>
-              {isAdmin && ( // Render admin ID field only if isAdmin is true
                 <input
-                  class="p-2 mt-1 rounded-xl border"
-                  type="text"
-                  name="adminID"
-                  placeholder="Admin ID"
-                  value={admID}
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  required
+                  value={password}
                   onChange={(e) => {
-                    setAdmID(e.target.value);
+                    setPassword(e.target.value);
                   }}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  
                 />
-              )}
-              <div class="main p-2 flex border rounded-full overflow-hidden select-none">
-                <div class="title py-3 my-auto px-2 bg-blue-500 text-white text-sm font-semibold">
-                  IsAdmin
-                </div>
-                <label class="flex radio p-2 cursor-pointer">
-                  <input
-                    class="my-auto transform scale-125"
-                    type="radio"
-                    name="sfg"
-                    onClick={() => setIsAdmin(true)}
-                  />
-                  <div class="title px-2">YES</div>
-                </label>
-
-                <label class="flex radio p-2 cursor-pointer">
-                  <input
-                    class="my-auto transform scale-125"
-                    type="radio"
-                    name="sfg"
-                    onClick={() => setIsAdmin(false)}
-                  />
-                  <div class="title px-2">NO</div>
-                </label>
+                {/*  */}
+                
+                {/*  */}
               </div>
+              
+            </div>
+
+            <div>
               <button
-                class="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium"
                 type="submit"
                 onClick={login}
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Login
+                Sign in
               </button>
-            </form>
-            <div class="mt-1  items-center text-gray-100">
-              <hr class="border-gray-300" />
-              <p class="text-center text-sm">OR</p>
-              <hr class="border-gray-300" />
             </div>
-            {/*  */}
-            {/*  */}
-        
-            <GoogleOAuthProvider clientId="705323377845-l6kep13nksqso5pk2gv8c1me00se2c3n.apps.googleusercontent.com"> {/* Wrap your component with GoogleOAuthProvider */}
-              <GoogleLogin
-              
-                onSuccess={(credentialResponse) => {
-                  const credentialResponseDecoded=jwtDecode(credentialResponse.credential);
-                  navigate("/dhome", { state: { email } }); // Pass email as a prop
-                  console.log(credentialResponseDecoded);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-                
-              />
-            </GoogleOAuthProvider>
-            
-            <div class="mt-10 text-sm border-b border-gray-500 py-5 playfair tooltip">
-              Forget password?
-            </div>
-            <div class="mt-4 text-sm flex justify-between items-center container-mr">
-              <p class="mr-3 md:mr-0 ">If you don't have an account..</p>
-              <Link
-                class="hover:border register text-white bg-[#002D74] hover:border-gray-400 rounded-xl py-2 px-5 hover:scale-110 hover:bg-[#002c7424] font-semibold duration-300"
-                to="/RS"
-              >
-                Register
-              </Link>
-            </div>
-          </div>
-          <div class="md:block hidden w-1/2">
-            <img
-              class="rounded-2xl max-h-[1600px]"
-              src={cutmimg}
-              alt="login form image"
-            />
-          </div>
+          </form>
+
+          
         </div>
-      </section>
+      </div>
     </>
   );
 }

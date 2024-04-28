@@ -49,33 +49,10 @@ const Dashboard= () => {
 
             <span className="ml-2 text-sm font-medium">Dasboard</span>
           </Link>
+          
           <Link
             className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-            to="/dstudent"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-file-stack"
-            >
-              <path d="M21 7h-3a2 2 0 0 1-2-2V2" />
-              <path d="M21 6v6.5c0 .8-.7 1.5-1.5 1.5h-7c-.8 0-1.5-.7-1.5-1.5v-9c0-.8.7-1.5 1.5-1.5H17Z" />
-              <path d="M7 8v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H15" />
-              <path d="M3 12v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H11" />
-            </svg>
-
-            <span className="ml-2 text-sm font-medium">Update</span>
-          </Link>
-          <Link
-            className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-            to="/acourse"
+            to="/courseUpdate"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,11 +72,9 @@ const Dashboard= () => {
             </svg>
             <span className="ml-2 text-sm font-medium">Subject's</span>
           </Link>
-        </div>
-        <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
           <Link
             className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-            to="/Apassword"
+            to="/admMsg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,17 +86,46 @@ const Dashboard= () => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-file-lock"
+              class="lucide lucide-file-stack"
             >
-              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-              <rect width="8" height="6" x="8" y="12" rx="1" />
-              <path d="M10 12v-2a2 2 0 1 1 4 0v2" />
+              <path d="M21 7h-3a2 2 0 0 1-2-2V2" />
+              <path d="M21 6v6.5c0 .8-.7 1.5-1.5 1.5h-7c-.8 0-1.5-.7-1.5-1.5v-9c0-.8.7-1.5 1.5-1.5H17Z" />
+              <path d="M7 8v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H15" />
+              <path d="M3 12v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H11" />
             </svg>
-            <span className="ml-2 text-sm font-medium">Password</span>
+
+            <span className="ml-2 text-sm font-medium">Message</span>
           </Link>
           <Link
             className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-            to="/Aabout"
+            to="/permit"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-file-stack"
+            >
+              <path d="M21 7h-3a2 2 0 0 1-2-2V2" />
+              <path d="M21 6v6.5c0 .8-.7 1.5-1.5 1.5h-7c-.8 0-1.5-.7-1.5-1.5v-9c0-.8.7-1.5 1.5-1.5H17Z" />
+              <path d="M7 8v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H15" />
+              <path d="M3 12v8.8c0 .3.2.6.4.8.2.2.5.4.8.4H11" />
+            </svg>
+
+            <span className="ml-2 text-sm font-medium">Student's Register</span>
+          </Link>
+        </div>
+        <div className="flex flex-col items-center w-full mt-2 border-t border-gray-700">
+          
+          <Link
+            className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+            to="/aprofile"
           >
             <svg
               className="w-6 h-6 stroke-current"
@@ -139,27 +143,7 @@ const Dashboard= () => {
             </svg>
             <span className="ml-2 text-sm font-medium">Profile</span>
           </Link>
-          <Link
-            className="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
-            to="/dHistory"
-          >
-            <svg
-              className="w-6 h-6 stroke-current"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-              />
-            </svg>
-            <span className="ml-2 text-sm font-medium">History</span>
-            <span className="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
-          </Link>
+        
         </div>
       </div>
       <Link
